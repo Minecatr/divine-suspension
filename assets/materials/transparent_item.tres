@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bix8s6iieykay"]
+
+[resource]
+blend_mode = 3
+metallic = 1.0
+roughness = 0.0
+refraction_enabled = true

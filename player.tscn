@@ -6,7 +6,17 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_snmd0"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4flbx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
+size = Vector3(0.1, 0.5, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
+size = Vector3(0.1, 0.5, 0.1)
+
 [node name="Player" type="CharacterBody3D" unique_id=452981251]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_4flbx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=570835074]
@@ -17,3 +27,23 @@ mesh = SubResource("SphereMesh_snmd0")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=434086783]
 current = true
+fov = 90.0
+
+[node name="Interact" type="RayCast3D" parent="Camera3D" unique_id=535533316]
+target_position = Vector3(0, 0, -2)
+collision_mask = 4
+
+[node name="Hand" type="Node3D" parent="Camera3D" unique_id=447617895]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0.325, 0, -0.625)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Camera3D/Hand" unique_id=270054527 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_4flbx")
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Hand/RigidBody3D" unique_id=1213544684]
+shape = SubResource("BoxShape3D_snmd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/Hand/RigidBody3D" unique_id=838542296]
+mesh = SubResource("BoxMesh_8ccjp")

@@ -1,28 +1,86 @@
 extends CharacterBody3D
 
+@export var SPEED := 5.0
+@export var JUMP_VELOCITY := 6.5
+@export var ACCELERATION := 10.0
+@export var AIR_ACCELERATION := 2.0
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var jumping = false
 
+var input_rotation: Vector3
+var mouse_input: Vector2
+var mouse_sensitivity: float = 0.002
+
+var use_interpolation: bool = false
+var circle_strafe: bool = true
+
+@onready var interact = $Camera3D/Interact
+@onready var camera = $Camera3D
+@onready var hand = camera.get_node("Hand")
+
+func _force_update_is_on_floor() -> void:
+	var old_velocity := velocity
+	velocity = Vector3.ZERO
+	move_and_slide()
+	velocity = old_velocity
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	var input_dir: Vector2 = Input.get_vector("left", "right", "forward", "backward")
+	jumping = Input.is_action_pressed("jump")
+	
+	_force_update_is_on_floor()
+	var acceleration := ACCELERATION if is_on_floor() else AIR_ACCELERATION
+	var speed := SPEED
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y).normalized()).normalized()
+	var target_velocity := direction * speed
+	
+	#mouse_rotation_amount_hack = 0
+	if !is_on_floor():
+		velocity.y -= gravity * delta
+	if is_on_floor() and jumping:
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	velocity = Vector3(
+		lerp(velocity.x, target_velocity.x, delta * acceleration),
+		velocity.y,
+		lerp(velocity.z, target_velocity.z, delta * acceleration))
+	
+	#velocity *= delta
 	move_and_slide()
+	#velocity /= delta
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		mouse_input.x += -event.screen_relative.x * mouse_sensitivity
+		mouse_input.y += -event.screen_relative.y * mouse_sensitivity
+
+func _process(_delta: float) -> void:
+	input_rotation.x = clampf(input_rotation.x + mouse_input.y, deg_to_rad(-90), deg_to_rad(85))
+	input_rotation.y += mouse_input.x
+	
+	# rotate camera controller (up/down)
+	camera.transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
+	
+	# rotate player (left/right)
+	global_transform.basis = Basis.from_euler(Vector3(0.0, input_rotation.y, 0.0))
+	
+	#global_transform = camera_controller_anchor.get_global_transform_interpolated()
+	
+	mouse_input = Vector2.ZERO
+	if Input.is_action_just_pressed("interact"):
+		var object = interact.get_collider()
+		if interact.is_colliding() and object.is_in_group('item'):
+			object.reparent(hand)
+			object.position = Vector3.ZERO
+			object.rotation = Vector3.ZERO
+			object.freeze = true
+	
+	if Input.is_action_just_pressed("drop"):
+		if hand.get_child_count()>0:
+			hand.get_child(0).freeze = false
+			hand.get_child(0).reparent(get_parent())
+			
