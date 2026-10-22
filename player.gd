@@ -63,16 +63,15 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	input_rotation.x = clampf(input_rotation.x + mouse_input.y, deg_to_rad(-90), deg_to_rad(85))
 	input_rotation.y += mouse_input.x
-	
 	# rotate camera controller (up/down)
 	#camera.transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
-	
 	# rotate player (left/right)
 	global_transform.basis = Basis.from_euler(Vector3(input_rotation.x, input_rotation.y, 0.0))
-	
 	#global_transform = camera_controller_anchor.get_global_transform_interpolated()
-	
 	mouse_input = Vector2.ZERO
+	
+	
+	
 	if interact.is_colliding():
 		var object = interact.get_collider()
 		#if object.is_in_group('interactable'):

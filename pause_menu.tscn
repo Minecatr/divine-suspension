@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://ca4hxjajj4xgt"]
+
+[ext_resource type="Script" uid="uid://duo17f8c1ns5q" path="res://resume.gd" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://dv8cdwkpnlecu" path="res://pause_menu.gd" id="1_p81d2"]
+[ext_resource type="Script" uid="uid://bov5dxrr5tfjh" path="res://settings.gd" id="2_nwcfo"]
+[ext_resource type="Script" uid="uid://bjfmlyliysh32" path="res://quit.gd" id="3_05uyy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snmd0"]
+bg_color = Color(0, 0, 0, 0.0627451)
+
+[node name="PauseMenu" type="Control" unique_id=1049122025]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p81d2")
+
+[node name="Panel" type="Panel" parent="." unique_id=159802282]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_snmd0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2088018073]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=668679651]
+layout_mode = 2
+text = "Resume"
+script = ExtResource("1_hdmo1")
+
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=507440815]
+layout_mode = 2
+text = "Settings"
+script = ExtResource("2_nwcfo")
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=729470657]
+layout_mode = 2
+text = "Quit"
+script = ExtResource("3_05uyy")

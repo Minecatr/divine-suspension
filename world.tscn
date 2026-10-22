@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://dtivl7374fara" path="res://grass.tres" id="2_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://bg0yao01lthm6" path="res://hud.tscn" id="2_fj7yv"]
 [ext_resource type="Script" uid="uid://k2gauaw6xxhc" path="res://camera_3d.gd" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://ca4hxjajj4xgt" path="res://pause_menu.tscn" id="5_wse8f"]
 [ext_resource type="PackedScene" uid="uid://bh7h644ih8115" path="res://scenes/items/stick.tscn" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://crxfdqygloy04" path="res://scenes/items/rock.tscn" id="7_pkg7o"]
 [ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="8_gbfbk"]
@@ -162,6 +163,10 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1304415612]
 
 [node name="HUD" parent="CanvasLayer" unique_id=2083031196 instance=ExtResource("2_fj7yv")]
+mouse_filter = 1
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1049122025 instance=ExtResource("5_wse8f")]
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=539319403]
 transform = Transform3D(-0.8660241, 0.36118358, -0.34575823, 0, 0.69151324, 0.7223638, 0.5000023, 0.6255845, -0.5988671, -4.247658, 8.837454, -7.7740555)
