@@ -1,18 +1,53 @@
 [gd_scene format=3 uid="uid://dbbstpsmmxgcx"]
 
 [ext_resource type="Script" uid="uid://71d8epri65pb" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://c0te2d5idvqfv" path="res://assets/character.png" id="2_onrkg"]
+[ext_resource type="Texture2D" uid="uid://cccxn1q62ap8m" path="res://assets/crosshairs/crosshair_0.svg" id="3_i3pqv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_snmd0"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2vnct"]
+albedo_texture = ExtResource("2_onrkg")
+
 [sub_resource type="SphereMesh" id="SphereMesh_snmd0"]
+material = SubResource("StandardMaterial3D_2vnct")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4flbx"]
+[sub_resource type="Animation" id="Animation_onrkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Hand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.7853982, 0, 0)]
+}
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
-size = Vector3(0.1, 0.5, 0.1)
+[sub_resource type="Animation" id="Animation_i3pqv"]
+resource_name = "swing"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Hand:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.7853982, 0, 0), Vector3(-1.3089969, 0, 0), Vector3(-0.7853982, 0, 0)]
+}
 
-[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
-size = Vector3(0.1, 0.5, 0.1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
+_data = {
+&"RESET": SubResource("Animation_onrkg"),
+&"swing": SubResource("Animation_i3pqv")
+}
 
 [node name="Player" type="CharacterBody3D" unique_id=452981251]
 collision_layer = 2
@@ -26,7 +61,6 @@ shape = SubResource("SphereShape3D_snmd0")
 mesh = SubResource("SphereMesh_snmd0")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=434086783]
-current = true
 fov = 90.0
 
 [node name="Interact" type="RayCast3D" parent="Camera3D" unique_id=535533316]
@@ -34,16 +68,13 @@ target_position = Vector3(0, 0, -2)
 collision_mask = 4
 
 [node name="Hand" type="Node3D" parent="Camera3D" unique_id=447617895]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0.325, 0, -0.625)
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0.4, -0.3, -0.5)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Camera3D/Hand" unique_id=270054527 groups=["item"]]
-collision_layer = 4
-collision_mask = 5
-physics_material_override = SubResource("PhysicsMaterial_4flbx")
-freeze = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=200077767]
+libraries/ = SubResource("AnimationLibrary_hqtel")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Hand/RigidBody3D" unique_id=1213544684]
-shape = SubResource("BoxShape3D_snmd0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/Hand/RigidBody3D" unique_id=838542296]
-mesh = SubResource("BoxMesh_8ccjp")
+[node name="Indicator" type="Sprite3D" parent="." unique_id=1956824273]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+billboard = 1
+no_depth_test = true
+texture = ExtResource("3_i3pqv")

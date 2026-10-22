@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://cdoe15aigxb0p"]
 
 [ext_resource type="PackedScene" uid="uid://dbbstpsmmxgcx" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://nx5yy6a14qal" path="res://world.gd" id="1_tlwt5"]
+[ext_resource type="Material" uid="uid://dtivl7374fara" path="res://grass.tres" id="2_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://bg0yao01lthm6" path="res://hud.tscn" id="2_fj7yv"]
+[ext_resource type="Script" uid="uid://k2gauaw6xxhc" path="res://camera_3d.gd" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://bh7h644ih8115" path="res://scenes/items/stick.tscn" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://crxfdqygloy04" path="res://scenes/items/rock.tscn" id="7_pkg7o"]
+[ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="8_gbfbk"]
+[ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://crafter.gd" id="8_ioo17"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.18656853, 0.553558, 0.81646246, 1)
 sky_horizon_color = Color(0.6545, 0.691075, 0.77, 1)
-ground_bottom_color = Color(0.17200491, 0.33988574, 0.59511983, 1)
+ground_bottom_color = Color(0.654902, 0.6901961, 0.76862746, 1)
 ground_horizon_color = Color(0.654902, 0.6901961, 0.76862746, 1)
 
 [sub_resource type="Sky" id="Sky_fj7yv"]
@@ -16,52 +23,213 @@ sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
 background_mode = 2
 sky = SubResource("Sky_fj7yv")
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.654902, 0.6901961, 0.76862746, 1)
+fog_sky_affect = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_snmd0"]
+size = Vector2(4000, 4000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lmhem"]
+size = Vector3(10, 0.1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_snmd0"]
-size = Vector3(10, 1, 10)
+size = Vector3(10, 500, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmhem"]
 albedo_color = Color(0.31, 0.2325, 0.2325, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
-size = Vector3(10, 1, 10)
+size = Vector3(10, 500, 10)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_snmd0"]
-size = Vector2(2000, 2000)
+[sub_resource type="Animation" id="Animation_tlwt5"]
+length = 0.001
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ccjp"]
-albedo_color = Color(0.2835, 0.45, 0.3279, 1)
+[sub_resource type="Animation" id="Animation_aqk2v"]
+resource_name = "start"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-2.2444975, 4.6567836, -4.3378735), Vector3(-1.1066413, 2.6945076, -2.0694513), Vector3(-2.4757318, 16.708733, -10.539135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.78976136, -2.6921673, 0), Vector3(-0.98174715, -2.731437, 0), Vector3(-0.99920034, -3.0194147, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ground:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -400, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:current")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D:shaking")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3, 9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
-[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_036b0"]
+_data = {
+&"RESET": SubResource("Animation_tlwt5"),
+&"start": SubResource("Animation_aqk2v")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
+size = Vector3(1, 0.25, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rujv5"]
+size = Vector3(1, 0.1, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ioo17"]
+size = Vector3(0.1, 0.15, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lmhem"]
+size = Vector3(1, 0.5, 0.5)
 
 [node name="World" type="Node3D" unique_id=706411457]
+script = ExtResource("1_tlwt5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1527774694]
 environment = SubResource("Environment_tlwt5")
 
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1512033202]
+mesh = SubResource("PlaneMesh_snmd0")
+surface_material_override/0 = ExtResource("2_aqk2v")
+
 [node name="Platform" type="AnimatableBody3D" parent="." unique_id=1099415710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -249, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Platform" unique_id=1842401962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 249.95, 0)
+mesh = SubResource("BoxMesh_lmhem")
+surface_material_override/0 = ExtResource("2_aqk2v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Platform" unique_id=1383072449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_snmd0")
 surface_material_override/0 = SubResource("StandardMaterial3D_lmhem")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform" unique_id=1757293375]
 shape = SubResource("BoxShape3D_snmd0")
 
-[node name="Ground" type="MeshInstance3D" parent="." unique_id=1512033202]
-mesh = SubResource("PlaneMesh_snmd0")
-surface_material_override/0 = SubResource("StandardMaterial3D_8ccjp")
-
 [node name="Player" parent="." unique_id=452981251 instance=ExtResource("1_f3sb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1581763730]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=609022908]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1666546, 0)
-mesh = SubResource("BoxMesh_8ccjp")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1304415612]
 
 [node name="HUD" parent="CanvasLayer" unique_id=2083031196 instance=ExtResource("2_fj7yv")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=539319403]
+transform = Transform3D(-0.8660241, 0.36118358, -0.34575823, 0, 0.69151324, 0.7223638, 0.5000023, 0.6255845, -0.5988671, -4.247658, 8.837454, -7.7740555)
+current = true
+fov = 90.0
+script = ExtResource("5_036b0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1298934627]
+libraries/ = SubResource("AnimationLibrary_036b0")
+speed_scale = 3.0
+
+[node name="Stick" parent="." unique_id=654315378 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17341423, 1.0000153, 1.1661189)
+
+[node name="Stick2" parent="." unique_id=189997116 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17341423, 1.0000153, 0.6379217)
+
+[node name="Stick3" parent="." unique_id=1087698831 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17341423, 1.0000153, 0.89963055)
+
+[node name="Stick4" parent="." unique_id=1525887732 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0671911, 0.99999243, 1.1381118)
+
+[node name="CraftingTable" type="StaticBody3D" parent="." unique_id=1864966831 groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0001717, -1)
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("8_ioo17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CraftingTable" unique_id=961141836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_8ccjp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CraftingTable" unique_id=521338365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_rujv5")
+surface_material_override/0 = ExtResource("8_gbfbk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CraftingTable" unique_id=1281966132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.075, 0.19999999)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("8_gbfbk")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CraftingTable" unique_id=1825155104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.075, -0.20000005)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("8_gbfbk")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="CraftingTable" unique_id=1472972099]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.075, 0.19999999)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("8_gbfbk")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="CraftingTable" unique_id=472881031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.075, -0.20000005)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("8_gbfbk")
+
+[node name="Center" type="Node3D" parent="CraftingTable" unique_id=490015897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="Area3D" type="Area3D" parent="CraftingTable" unique_id=838607699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CraftingTable/Area3D" unique_id=1146938451]
+shape = SubResource("BoxShape3D_lmhem")
+
+[connection signal="body_entered" from="CraftingTable/Area3D" to="CraftingTable" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="CraftingTable/Area3D" to="CraftingTable" method="_on_area_3d_body_exited"]

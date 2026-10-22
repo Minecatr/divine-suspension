@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @export var SPEED := 5.0
-@export var JUMP_VELOCITY := 6.5
+@export var JUMP_VELOCITY := 2.5
 @export var ACCELERATION := 10.0
 @export var AIR_ACCELERATION := 2.0
 
@@ -16,8 +16,10 @@ var use_interpolation: bool = false
 var circle_strafe: bool = true
 
 @onready var interact = $Camera3D/Interact
+@onready var indicator = $Indicator
 @onready var camera = $Camera3D
 @onready var hand = camera.get_node("Hand")
+var held_item : RigidBody3D
 
 func _force_update_is_on_floor() -> void:
 	var old_velocity := velocity
@@ -63,24 +65,33 @@ func _process(_delta: float) -> void:
 	input_rotation.y += mouse_input.x
 	
 	# rotate camera controller (up/down)
-	camera.transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
+	#camera.transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
 	
 	# rotate player (left/right)
-	global_transform.basis = Basis.from_euler(Vector3(0.0, input_rotation.y, 0.0))
+	global_transform.basis = Basis.from_euler(Vector3(input_rotation.x, input_rotation.y, 0.0))
 	
 	#global_transform = camera_controller_anchor.get_global_transform_interpolated()
 	
 	mouse_input = Vector2.ZERO
-	if Input.is_action_just_pressed("interact"):
+	if interact.is_colliding():
 		var object = interact.get_collider()
-		if interact.is_colliding() and object.is_in_group('item'):
-			object.reparent(hand)
-			object.position = Vector3.ZERO
-			object.rotation = Vector3.ZERO
-			object.freeze = true
+		#if object.is_in_group('interactable'):
+		indicator.show()
+		indicator.global_position = object.get_node('Center').global_position
+		
+		if Input.is_action_just_pressed("interact"):
+			if object.is_in_group('interactable'):
+				object.interact()
+			elif object.is_in_group('item') and not held_item:
+				object.reparent(hand)
+				object.position = Vector3.ZERO
+				object.rotation = Vector3.ZERO
+				object.freeze = true
+				held_item = object
+	else:
+		indicator.hide()
 	
-	if Input.is_action_just_pressed("drop"):
-		if hand.get_child_count()>0:
-			hand.get_child(0).freeze = false
-			hand.get_child(0).reparent(get_parent())
-			
+	if Input.is_action_just_pressed("drop") and held_item:
+		held_item.freeze = false
+		held_item.reparent(get_parent())
+		held_item = null

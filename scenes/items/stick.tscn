@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bh7h644ih8115"]
+
+[ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="1_ibmtb"]
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/items/item.gd" id="1_jknlk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
+size = Vector3(0.1, 0.5, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
+size = Vector3(0.1, 0.5, 0.1)
+
+[node name="Stick" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_jknlk")
+id = "stick"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_snmd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("BoxMesh_8ccjp")
+surface_material_override/0 = ExtResource("1_ibmtb")
+
+[node name="Center" type="Node3D" parent="." unique_id=51247295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
