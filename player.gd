@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
 @export var SPEED := 5.0
-@export var JUMP_VELOCITY := 2.5
+@export var JUMP_VELOCITY := 4.0
 @export var ACCELERATION := 10.0
 @export var AIR_ACCELERATION := 2.0
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var jumping = false
+var object
 
 var input_rotation: Vector3
 var mouse_input: Vector2
@@ -15,11 +16,14 @@ var mouse_sensitivity: float = 0.002
 var use_interpolation: bool = false
 var circle_strafe: bool = true
 
-@onready var interact = $Camera3D/Interact
+@onready var interact :RayCast3D= $Camera3D/Interact
 @onready var indicator = $Indicator
 @onready var camera = $Camera3D
+@onready var animation_player = $AnimationPlayer
 @onready var hand = camera.get_node("Hand")
+@onready var back = $Back
 var held_item : RigidBody3D
+var stored_item : RigidBody3D
 
 func _force_update_is_on_floor() -> void:
 	var old_velocity := velocity
@@ -73,24 +77,51 @@ func _process(_delta: float) -> void:
 	
 	
 	if interact.is_colliding():
-		var object = interact.get_collider()
-		#if object.is_in_group('interactable'):
+		object = interact.get_collider()
 		indicator.show()
-		indicator.global_position = object.get_node('Center').global_position
-		
-		if Input.is_action_just_pressed("interact"):
-			if object.is_in_group('interactable'):
-				object.interact()
-			elif object.is_in_group('item') and not held_item:
-				object.reparent(hand)
-				object.position = Vector3.ZERO
-				object.rotation = Vector3.ZERO
-				object.freeze = true
-				held_item = object
+		if object and (object.is_in_group('interactable') or object.is_in_group('item')):
+			indicator.global_position = interact.get_collider().get_node('Center').global_position
+		elif held_item and held_item.structure:
+			indicator.global_position = (interact.get_collision_point()*2).round()/2
+		else:
+			indicator.hide()
 	else:
 		indicator.hide()
+
+	if Input.is_action_just_pressed("interact"):
+		
+		animation_player.play("swing")
+		if not interact.get_collider(): return
+		if object.is_in_group('interactable'):
+			object.interact(held_item.id if held_item else '')
+		elif object.is_in_group('item') and not held_item:
+			object.reparent(hand)
+			object.position = Vector3.ZERO
+			object.rotation = Vector3.ZERO
+			object.freeze = true
+			held_item = object
+		elif held_item:
+			if held_item.structure and object.is_in_group('map'):
+				var structure_instance = held_item.structure.instantiate()
+				structure_instance.position = indicator.global_position
+				structure_instance.rotation_degrees.y = 45*round(rotation_degrees.y/45)+180
+				GLOBALS.world.add_child(structure_instance)
+				if held_item.consumable:
+					held_item.queue_free()
+
 	
 	if Input.is_action_just_pressed("drop") and held_item:
 		held_item.freeze = false
 		held_item.reparent(get_parent())
 		held_item = null
+	if Input.is_action_just_pressed('store'):
+		if stored_item:
+			stored_item.reparent(hand)
+			stored_item.position = Vector3.ZERO
+			stored_item.rotation = Vector3.ZERO
+		if held_item:
+			held_item.reparent(back)
+			held_item.position = Vector3.ZERO
+			held_item.rotation = Vector3.ZERO
+		stored_item = back.get_child(0)
+		held_item = hand.get_child(0)

@@ -2,3 +2,4 @@
 
 [resource]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
+z_clip_scale = 0.5

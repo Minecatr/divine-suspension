@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://uw6k1jyy6n0h"]
+
+[ext_resource type="Script" uid="uid://q38akv8fijwa" path="res://sapling.gd" id="1_8qfgd"]
+[ext_resource type="Material" uid="uid://dtivl7374fara" path="res://grass.tres" id="2_tinta"]
+[ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="3_jeuq1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mcmgq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66a6d"]
+size = Vector3(0.25, 1.5, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hfij2"]
+size = Vector3(0.25, 1.5, 0.25)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=439763588]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_8qfgd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1213955085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("SphereMesh_mcmgq")
+surface_material_override/0 = ExtResource("2_tinta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=172191761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_66a6d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2030657847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("BoxMesh_hfij2")
+surface_material_override/0 = ExtResource("3_jeuq1")

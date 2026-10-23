@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crxfdqygloy04"]
 
-[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/items/item.gd" id="1_g88us"]
-[ext_resource type="Material" uid="uid://cr88sgk8mmj0h" path="res://stone.tres" id="1_khi28"]
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_g88us"]
+[ext_resource type="Material" uid="uid://beih7o1iu1n5q" path="res://assets/materials/slate.tres" id="2_mek2u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -22,7 +22,7 @@ shape = SubResource("BoxShape3D_snmd0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228 groups=["item"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_8ccjp")
-surface_material_override/0 = ExtResource("1_khi28")
+surface_material_override/0 = ExtResource("2_mek2u")
 
 [node name="Center" type="Node3D" parent="." unique_id=771292868]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

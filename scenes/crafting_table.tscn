@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bc22wowghli10"]
+
+[ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://structure.gd" id="1_tmrmv"]
+[ext_resource type="Script" uid="uid://bvrivcfcxptqc" path="res://recipe.gd" id="3_f8j48"]
+[ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="5_sh41p"]
+
+[sub_resource type="Resource" id="Resource_i0xfq"]
+script = ExtResource("3_f8j48")
+result = "axe"
+ingredients = Array[String](["stick", "rock"])
+metadata/_custom_type_script = "uid://bvrivcfcxptqc"
+
+[sub_resource type="Resource" id="Resource_70uel"]
+script = ExtResource("3_f8j48")
+result = "hammer"
+ingredients = Array[String](["log", "stick"])
+metadata/_custom_type_script = "uid://bvrivcfcxptqc"
+
+[sub_resource type="Resource" id="Resource_7525o"]
+script = ExtResource("3_f8j48")
+result = "wall"
+ingredients = Array[String](["log"])
+metadata/_custom_type_script = "uid://bvrivcfcxptqc"
+
+[sub_resource type="Resource" id="Resource_poy5y"]
+script = ExtResource("3_f8j48")
+result = "floor"
+ingredients = Array[String](["wall"])
+metadata/_custom_type_script = "uid://bvrivcfcxptqc"
+
+[sub_resource type="Resource" id="Resource_1bx2v"]
+script = ExtResource("3_f8j48")
+result = "wall"
+ingredients = Array[String](["floor"])
+metadata/_custom_type_script = "uid://bvrivcfcxptqc"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
+size = Vector3(1, 0.25, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rujv5"]
+size = Vector3(1, 0.1, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ioo17"]
+size = Vector3(0.1, 0.15, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lmhem"]
+size = Vector3(1, 0.5, 0.5)
+
+[node name="CraftingTable" type="StaticBody3D" unique_id=517976432 groups=["interactable"]]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_tmrmv")
+destroy_items = Array[String](["hammer"])
+results = Array[String](["stick", "stick"])
+recipes = Array[ExtResource("3_f8j48")]([SubResource("Resource_i0xfq"), SubResource("Resource_70uel"), SubResource("Resource_7525o"), SubResource("Resource_poy5y"), SubResource("Resource_1bx2v")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1846286824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_8ccjp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1644202229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_rujv5")
+surface_material_override/0 = ExtResource("5_sh41p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1533446206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.075, 0.19999999)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("5_sh41p")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=506250147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.075, -0.20000005)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("5_sh41p")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1742125416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.075, 0.19999999)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("5_sh41p")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1582557454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.075, -0.20000005)
+mesh = SubResource("BoxMesh_ioo17")
+surface_material_override/0 = ExtResource("5_sh41p")
+
+[node name="Center" type="Node3D" parent="." unique_id=678755710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=6672292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1471379017]
+shape = SubResource("BoxShape3D_lmhem")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

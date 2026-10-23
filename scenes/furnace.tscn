@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dued23lqbtsel"]
+
+[ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://structure.gd" id="1_s82ge"]
+[ext_resource type="Script" uid="uid://bvrivcfcxptqc" path="res://recipe.gd" id="3_uxcy8"]
+[ext_resource type="Material" uid="uid://cr88sgk8mmj0h" path="res://stone.tres" id="5_45m7t"]
+
+[sub_resource type="Resource" id="Resource_o2r0y"]
+script = ExtResource("3_uxcy8")
+result = "coal"
+ingredients = Array[String](["log"])
+metadata/_custom_type_script = "uid://bvrivcfcxptqc"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
+size = Vector3(1, 0.15, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rujv5"]
+size = Vector3(1, 0.15, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j3n5c"]
+size = Vector3(0.6, 0.15, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2t326"]
+size = Vector3(0.6, 0.45000002, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2d7re"]
+size = Vector3(0.15, 0.6, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lmhem"]
+size = Vector3(0.6, 0.45000002, 0.5)
+
+[node name="Furnace" type="StaticBody3D" unique_id=517976432 groups=["interactable"]]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_s82ge")
+destroy_items = Array[String](["hammer"])
+results = Array[String](["rock", "rock"])
+recipes = Array[ExtResource("3_uxcy8")]([SubResource("Resource_o2r0y")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1846286824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+shape = SubResource("BoxShape3D_8ccjp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1644202229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+mesh = SubResource("BoxMesh_rujv5")
+surface_material_override/0 = ExtResource("5_45m7t")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1721939428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675, 0)
+mesh = SubResource("BoxMesh_j3n5c")
+surface_material_override/0 = ExtResource("5_45m7t")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=270480279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0.175)
+mesh = SubResource("BoxMesh_2t326")
+surface_material_override/0 = ExtResource("5_45m7t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1807057407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0.45000005, 0)
+mesh = SubResource("BoxMesh_2d7re")
+surface_material_override/0 = ExtResource("5_45m7t")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1985679263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0.45000005, 0)
+mesh = SubResource("BoxMesh_2d7re")
+surface_material_override/0 = ExtResource("5_45m7t")
+
+[node name="Center" type="Node3D" parent="." unique_id=678755710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=6672292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1471379017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+shape = SubResource("BoxShape3D_lmhem")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

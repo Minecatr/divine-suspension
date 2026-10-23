@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dn0vpu1pkutbi"]
+
+[ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://structure.gd" id="1_tdtm6"]
+[ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="4_yu87e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rujv5"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k2ro4"]
+radius = 0.05
+
+[node name="Wall" type="StaticBody3D" unique_id=517976432 groups=["interactable"]]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_tdtm6")
+destroy_items = Array[String](["hammer"])
+results = Array[String](["wall"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1846286824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9604645e-08, 0.5, -1.4901161e-08)
+shape = SubResource("BoxShape3D_8ccjp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1644202229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_rujv5")
+surface_material_override/0 = ExtResource("4_yu87e")
+
+[node name="Center" type="Node3D" parent="." unique_id=678755710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PlacementZone" type="StaticBody3D" parent="." unique_id=543527492 groups=["map"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="PlacementZone" unique_id=2109588893]
+shape = SubResource("SphereShape3D_k2ro4")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="PlacementZone" unique_id=645594825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+shape = SubResource("SphereShape3D_k2ro4")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="PlacementZone" unique_id=1805357258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99999994, -1, 0)
+shape = SubResource("SphereShape3D_k2ro4")

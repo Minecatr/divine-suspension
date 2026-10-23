@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c24kyql4r705s"]
+
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_cbxsd"]
+[ext_resource type="Material" uid="uid://38t32046sscy" path="res://coal.tres" id="2_cbxsd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Coal" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_cbxsd")
+id = "coal"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_snmd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228 groups=["item"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_8ccjp")
+surface_material_override/0 = ExtResource("2_cbxsd")
+
+[node name="Center" type="Node3D" parent="." unique_id=771292868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
