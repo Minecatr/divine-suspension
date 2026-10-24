@@ -16,8 +16,9 @@ size = Vector3(0.25, 1.5, 0.25)
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_44ud8")
-destroy_items = Array[String](["axe"])
-results = Array[String](["stick", "stick", "log", "log", "acorn", "acorn"])
+crafting_tools = Array[String]([])
+destroy_tools = Array[String](["axe"])
+id = "tree"
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=218199549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

@@ -1,7 +1,6 @@
-[gd_scene format=3 uid="uid://crxfdqygloy04"]
+[gd_scene format=3 uid="uid://b8dt2aj8g0yo6"]
 
-[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_g88us"]
-[ext_resource type="Material" uid="uid://beih7o1iu1n5q" path="res://assets/materials/slate.tres" id="2_mek2u"]
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_dttaf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -9,11 +8,17 @@ size = Vector3(0.2, 0.2, 0.2)
 [sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Rock" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukbap"]
+albedo_color = Color(0.85, 0.5695, 0.3825, 1)
+metallic = 0.5
+roughness = 0.5
+
+[node name="Iron" type="RigidBody3D" unique_id=654315378 groups=["item"]]
 collision_layer = 4
 collision_mask = 5
-script = ExtResource("1_g88us")
-id = "rock"
+can_sleep = false
+script = ExtResource("1_dttaf")
+id = "iron"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
@@ -22,7 +27,7 @@ shape = SubResource("BoxShape3D_snmd0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228 groups=["item"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_8ccjp")
-surface_material_override/0 = ExtResource("2_mek2u")
+surface_material_override/0 = SubResource("StandardMaterial3D_ukbap")
 
 [node name="Center" type="Node3D" parent="." unique_id=771292868]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

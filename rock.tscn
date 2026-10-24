@@ -1,28 +1,33 @@
 [gd_scene format=3 uid="uid://cxcdsmtm6bs7w"]
 
 [ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://structure.gd" id="1_wecdg"]
-[ext_resource type="Material" uid="uid://beih7o1iu1n5q" path="res://assets/materials/slate.tres" id="2_68h2w"]
+[ext_resource type="Material" uid="uid://cr88sgk8mmj0h" path="res://stone.tres" id="2_68h2w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
-size = Vector3(0.5, 0.4, 0.5)
+size = Vector3(0.5, 0.25, 0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_hiqwa"]
-size = Vector3(0.5, 0.4, 0.5)
+[sub_resource type="SphereMesh" id="SphereMesh_68h2w"]
+radius = 0.25
+height = 0.25
+radial_segments = 6
+rings = 3
+is_hemisphere = true
 
-[node name="StaticBody3D2" type="StaticBody3D" unique_id=1457386778 groups=["interactable"]]
+[node name="Rock" type="StaticBody3D" unique_id=1457386778 groups=["interactable"]]
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_wecdg")
-destroy_items = Array[String](["axe"])
-results = Array[String](["rock", "rock"])
+crafting_tools = Array[String]([])
+destroy_tools = Array[String](["axe"])
+id = "rock"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1610082153]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19951177, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12451176, 0)
 shape = SubResource("BoxShape3D_8ccjp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1830206055]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000005, 0)
-mesh = SubResource("BoxMesh_hiqwa")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4703484e-08, 0)
+mesh = SubResource("SphereMesh_68h2w")
 surface_material_override/0 = ExtResource("2_68h2w")
 
 [node name="Center" type="Node3D" parent="." unique_id=1381549629]

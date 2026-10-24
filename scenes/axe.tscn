@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="1_6pa1j"]
 [ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_f40fb"]
-[ext_resource type="Material" uid="uid://beih7o1iu1n5q" path="res://assets/materials/slate.tres" id="3_8s0ly"]
+[ext_resource type="Material" uid="uid://cr88sgk8mmj0h" path="res://stone.tres" id="3_8s0ly"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
 size = Vector3(0.1, 0.5, 0.1)
@@ -19,6 +19,7 @@ size = Vector3(0.1, 0.2, 0.2)
 [node name="Axe" type="RigidBody3D" unique_id=654315378 groups=["item"]]
 collision_layer = 4
 collision_mask = 5
+can_sleep = false
 script = ExtResource("1_f40fb")
 id = "axe"
 

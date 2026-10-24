@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://vkkhpii3vv58"]
+
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_2cges"]
+[ext_resource type="Material" uid="uid://dv0a3j3vx0a2a" path="res://steel.tres" id="2_gtcd4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
+size = Vector3(0.1, 0.05, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
+size = Vector3(0.1, 0.05, 0.2)
+
+[node name="Steel" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+can_sleep = false
+script = ExtResource("1_2cges")
+id = "steel"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7252903e-09, 0.024999999, 0)
+shape = SubResource("BoxShape3D_snmd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228 groups=["item"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("BoxMesh_8ccjp")
+surface_material_override/0 = ExtResource("2_gtcd4")
+
+[node name="Center" type="Node3D" parent="." unique_id=771292868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)

@@ -1,20 +1,7 @@
 [gd_scene format=3 uid="uid://c3c8rfquv6ip8"]
 
 [ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://structure.gd" id="1_6e6rp"]
-[ext_resource type="Script" uid="uid://bvrivcfcxptqc" path="res://recipe.gd" id="3_dl2fm"]
 [ext_resource type="Material" uid="uid://vai6gsm8gbmw" path="res://dirt.tres" id="6_6e6rp"]
-
-[sub_resource type="Resource" id="Resource_i0xfq"]
-script = ExtResource("3_dl2fm")
-result = "crafting_table"
-ingredients = Array[String](["stick", "stick"])
-metadata/_custom_type_script = "uid://bvrivcfcxptqc"
-
-[sub_resource type="Resource" id="Resource_70uel"]
-script = ExtResource("3_dl2fm")
-result = "furnace"
-ingredients = Array[String](["rock", "rock"])
-metadata/_custom_type_script = "uid://bvrivcfcxptqc"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
 size = Vector3(0.5, 0.05, 0.5)
@@ -29,9 +16,8 @@ size = Vector3(0.5, 0.4, 0.5)
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_6e6rp")
-crafting_items = Array[String](["hammer"])
-destroy_items = Array[String](["hammer"])
-recipes = Array[ExtResource("3_dl2fm")]([SubResource("Resource_i0xfq"), SubResource("Resource_70uel")])
+crafting_tools = Array[String](["hammer"])
+id = "plot"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1846286824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024999999, 0)

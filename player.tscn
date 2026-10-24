@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://c0te2d5idvqfv" path="res://assets/character.png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cccxn1q62ap8m" path="res://assets/crosshairs/crosshair_0.svg" id="3_i3pqv"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_snmd0"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i3pqv"]
+radius = 0.25
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2vnct"]
 albedo_texture = ExtResource("2_onrkg")
@@ -55,7 +57,7 @@ collision_mask = 3
 script = ExtResource("1_4flbx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=570835074]
-shape = SubResource("SphereShape3D_snmd0")
+shape = SubResource("CapsuleShape3D_i3pqv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=22531030]
 mesh = SubResource("SphereMesh_snmd0")
