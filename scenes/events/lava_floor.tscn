@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c1kswcfitla2m"]
+
+[ext_resource type="Script" uid="uid://pfi1fx3i1r6k" path="res://scenes/events/lava_floor.gd" id="1_1vi2s"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1vi2s"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rujv5"]
+size = Vector2(4000, 4000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ccjp"]
+albedo_color = Color(1, 0.3019608, 0.14901961, 1)
+emission_enabled = true
+emission = Color(1, 0.3019608, 0.14901961, 1)
+emission_energy_multiplier = 5.0
+
+[node name="LavaFloor" type="Node3D" unique_id=1528208529]
+script = ExtResource("1_1vi2s")
+
+[node name="CountDownTimer" type="Timer" parent="." unique_id=34588601]
+one_shot = true
+autostart = true
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=1055513349]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1508411114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1671174344]
+shape = SubResource("WorldBoundaryShape3D_1vi2s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1363012162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_rujv5")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ccjp")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=1315778715]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="CountDownTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_timer_2_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_timer_3_timeout"]

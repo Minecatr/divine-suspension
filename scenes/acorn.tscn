@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_v8vpm"]
 [ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="2_2l83l"]
-[ext_resource type="PackedScene" uid="uid://uw6k1jyy6n0h" path="res://sapling.tscn" id="2_puyam"]
+[ext_resource type="PackedScene" uid="uid://uw6k1jyy6n0h" path="res://scenes/sapling.tscn" id="2_puyam"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
 size = Vector3(0.1, 0.1, 0.1)

@@ -8,6 +8,7 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var jumping = false
 var object
+var can_swing = true
 
 var input_rotation: Vector3
 var mouse_input: Vector2
@@ -15,14 +16,18 @@ var mouse_sensitivity: float = 0.002
 
 var use_interpolation: bool = false
 var circle_strafe: bool = true
+var max_health := 100
 
 @onready var interact :RayCast3D= $Camera3D/Interact
 @onready var indicator = $Indicator
+@onready var health := max_health
+@onready var health_indicator:TextureProgressBar = indicator.get_node("SubViewport/ProgressBar")
 @onready var camera = $Camera3D
 @onready var animation_player = $AnimationPlayer
 @onready var hand = camera.get_node("Hand")
 @onready var back = $Back
 @onready var model = $MeshInstance3D
+@onready var message :=preload("res://message.tscn")
 var held_item : RigidBody3D
 var stored_item : RigidBody3D
 
@@ -56,6 +61,15 @@ func _physics_process(delta: float) -> void:
 	#velocity *= delta
 	move_and_slide()
 	#velocity /= delta
+	if global_position.y < GLOBALS.death_height:
+		damage(1)
+
+func damage(amount):
+	health -= amount
+	health = clamp(health,0,max_health)
+	GLOBALS.health_bar.value = health
+	if health <= 0:
+		get_tree().reload_current_scene()
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -77,28 +91,37 @@ func _process(_delta: float) -> void:
 	mouse_input = Vector2.ZERO
 	
 	
-	
+	health_indicator.value = 0
 	if interact.is_colliding():
 		object = interact.get_collider()
 		indicator.show()
-		if object and (object.is_in_group('interactable') or object.is_in_group('item')):
+		if object and object.is_in_group('item'):
 			indicator.global_position = interact.get_collider().get_node('Center').global_position
+		elif object and object.is_in_group('interactable'):
+			indicator.global_position = interact.get_collider().get_node('Center').global_position
+			if object.health:
+				health_indicator.max_value = object.max_health
+				health_indicator.value = object.health
+				health_indicator.show()
 		elif held_item and held_item.structure:
 			indicator.global_position = (interact.get_collision_point()*2).round()/2
 		else:
 			indicator.hide()
-		if Input.is_action_just_pressed("interact"):
-			if object.is_in_group('interactable'):
-				object.interact(held_item.id if held_item else '')
-				animation_player.play("swing")
-			elif object.is_in_group('item') and not held_item:
-				object.reparent(hand)
-				object.position = Vector3.ZERO
-				object.rotation = Vector3.ZERO
-				object.freeze = true
-				held_item = object
-			elif held_item:
-				if held_item.structure and object.is_in_group('map'):
+		
+		if Input.is_action_pressed("interact"):
+			if held_item and held_item.heal_amount and can_swing:
+				damage(-held_item.heal_amount)
+				if held_item.consumable:
+					held_item.queue_free()
+					can_swing = false
+					animation_player.play("swing")
+			elif object:
+				if object.is_in_group('interactable') and can_swing:
+					can_swing = false
+					object.interact(held_item.id if held_item else '', held_item.damage if held_item else 5)
+					animation_player.play("swing")
+				elif held_item and can_swing and held_item.structure and object.is_in_group('map'):
+					can_swing = false
 					animation_player.play("swing")
 					var structure_instance = held_item.structure.instantiate()
 					structure_instance.position = indicator.global_position
@@ -106,6 +129,15 @@ func _process(_delta: float) -> void:
 					GLOBALS.world.add_child(structure_instance)
 					if held_item.consumable:
 						held_item.queue_free()
+		if Input.is_action_just_pressed("interact") and object.is_in_group('item') and not held_item:
+			object.reparent(hand)
+			object.position = Vector3.ZERO
+			object.rotation = Vector3.ZERO
+			object.freeze = true
+			held_item = object
+			if object.structure or object.heal_amount:
+				can_swing = false
+				animation_player.play("equip")
 	else:
 		indicator.hide()
 
@@ -129,3 +161,7 @@ func _process(_delta: float) -> void:
 			new_stored_item = held_item
 		stored_item = new_stored_item
 		held_item = new_held_item
+
+
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	can_swing = true

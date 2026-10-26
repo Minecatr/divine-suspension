@@ -17,8 +17,9 @@ collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_44ud8")
 crafting_tools = Array[String]([])
-destroy_tools = Array[String](["axe"])
+destroy_tools = Array[String](["axe", "pickaxe"])
 id = "tree"
+max_health = 60
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=218199549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -34,5 +35,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 mesh = SubResource("BoxMesh_8ccjp")
 surface_material_override/0 = ExtResource("5_bgygo")
 
-[node name="Center" type="Node3D" parent="." unique_id=243301873]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+[node name="Center" type="Node3D" parent="." unique_id=26827427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

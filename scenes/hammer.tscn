@@ -3,18 +3,13 @@
 [ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_bxvmu"]
 [ext_resource type="PackedScene" uid="uid://c3c8rfquv6ip8" path="res://scenes/plot.tscn" id="2_bxvmu"]
 [ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="2_igiw8"]
+[ext_resource type="PackedScene" uid="uid://do0a728yphrwu" path="res://assets/models/hammer.glb" id="3_7cboi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
 size = Vector3(0.1, 0.35, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f40fb"]
 size = Vector3(0.2, 0.2, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8ccjp"]
-size = Vector3(0.1, 0.35, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_igiw8"]
-size = Vector3(0.2, 0.3, 0.2)
 
 [node name="Hammer" type="RigidBody3D" unique_id=654315378 groups=["item"]]
 collision_layer = 4
@@ -32,15 +27,15 @@ shape = SubResource("BoxShape3D_snmd0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5879354e-09, 0.45000002, 3.7252903e-09)
 shape = SubResource("BoxShape3D_f40fb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 0)
-mesh = SubResource("BoxMesh_8ccjp")
-surface_material_override/0 = ExtResource("2_igiw8")
-
 [node name="Center" type="Node3D" parent="." unique_id=51247295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2088837505]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.9802322e-08, 0.45000002, -4.8428774e-08)
-mesh = SubResource("BoxMesh_igiw8")
+[node name="hammer" parent="." unique_id=1780545766 instance=ExtResource("3_7cboi")]
+
+[node name="Cube" parent="hammer" index="0" unique_id=1129770530]
 surface_material_override/0 = ExtResource("2_igiw8")
+
+[node name="Cylinder" parent="hammer" index="1" unique_id=2018709594]
+surface_material_override/0 = ExtResource("2_igiw8")
+
+[editable path="hammer"]

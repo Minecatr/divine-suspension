@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bg0yao01lthm6"]
 
 [ext_resource type="Texture2D" uid="uid://dx7bhel5xl0yh" path="res://assets/crosshairs/crosshair_8.svg" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://dr8cpawc0ls3q" path="res://assets/progress.svg" id="3_640wx"]
 
 [node name="HUD" type="Control" unique_id=2083031196]
 layout_mode = 3
@@ -25,3 +26,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_37p78")
 expand_mode = 1
+
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=341381181]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 32.0
+offset_right = 192.0
+offset_bottom = 44.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+value = 100.0
+radial_initial_angle = 207.0
+radial_fill_degrees = 54.0
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+texture_under = ExtResource("3_640wx")
+texture_progress = ExtResource("3_640wx")
+tint_under = Color(0.09803922, 0.09803922, 0.09803922, 0.6)

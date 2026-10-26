@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://db6dtjeenc8xr"]
+
+[ext_resource type="Script" uid="uid://dqbietbmiyon8" path="res://gift.gd" id="1_evnnm"]
+[ext_resource type="Texture2D" uid="uid://bn8eehw8fa42k" path="res://icon.svg" id="1_i55os"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_snmd0"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ccjp"]
+albedo_texture = ExtResource("1_i55os")
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_70uel"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Gift" type="RigidBody3D" unique_id=1013295481 groups=["interactable"]]
+script = ExtResource("1_evnnm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1649619776]
+mesh = SubResource("BoxMesh_snmd0")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ccjp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1804110043]
+shape = SubResource("BoxShape3D_70uel")
+
+[node name="Center" type="Node3D" parent="." unique_id=1304035173]

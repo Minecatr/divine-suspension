@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-@onready var tree = load("res://tree.tscn")
+@onready var tree = preload("res://scenes/tree.tscn")
 
 func _process(delta: float) -> void:
 	scale += Vector3.ONE * delta * 0.01

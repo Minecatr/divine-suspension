@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://6atxpwsieqbt"]
+
+[ext_resource type="Script" uid="uid://do2ylmbr7qf0n" path="res://message.gd" id="1_d26o2"]
+
+[sub_resource type="Animation" id="Animation_d26o2"]
+resource_name = "start"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 64), Vector2(0, 56), Vector2(0, 56), Vector2(0, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_06ydw"]
+_data = {
+&"start": SubResource("Animation_d26o2")
+}
+
+[node name="Label" type="Label" unique_id=754393629]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 96.0
+offset_bottom = 119.000084
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "You are blessed"
+horizontal_alignment = 1
+script = ExtResource("1_d26o2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1682184282]
+libraries/ = SubResource("AnimationLibrary_06ydw")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

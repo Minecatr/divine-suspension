@@ -4,13 +4,13 @@
 [ext_resource type="Material" uid="uid://vai6gsm8gbmw" path="res://dirt.tres" id="6_6e6rp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
-size = Vector3(0.5, 0.05, 0.5)
+size = Vector3(1, 0.05, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rujv5"]
-size = Vector3(0.5, 0.05, 0.5)
+size = Vector3(1, 0.05, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lmhem"]
-size = Vector3(0.5, 0.4, 0.5)
+size = Vector3(1, 0.4, 0.5)
 
 [node name="Plot" type="StaticBody3D" unique_id=517976432 groups=["interactable"]]
 collision_layer = 5
@@ -24,7 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024999999, 0)
 shape = SubResource("BoxShape3D_8ccjp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1644202229]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024999997, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024999997, 1.4901161e-08)
 mesh = SubResource("BoxMesh_rujv5")
 surface_material_override/0 = ExtResource("6_6e6rp")
 

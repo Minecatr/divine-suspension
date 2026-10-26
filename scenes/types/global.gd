@@ -2,12 +2,15 @@ class_name GLOBALS
 
 static var world:Node
 static var paused:bool = false
+static var death_height:int = -50
+static var health_bar:TextureProgressBar
 
 static func interpret(id) -> PackedScene:
 	return load('res://scenes/'+id+'.tscn')
 
 static var recipe_sets: Dictionary = {
 	'plot': [
+		{'id': 'chest', 'ingredients': ['log','log']},
 		{'id': 'crafting_table', 'ingredients': ['log']},
 		{'id': 'furnace', 'ingredients': ['stone', 'stone']},
 	],
@@ -15,11 +18,12 @@ static var recipe_sets: Dictionary = {
 		{'id': 'axe', 'ingredients': ['stick', 'stone']},
 		{'id': 'hammer', 'ingredients': ['stick', 'log']},
 		{'id': 'wall', 'ingredients': ['log']},
+		{'id': 'pickaxe', 'ingredients': ['stick', 'steel']},
 	],
 	'furnace': [
 		{'id': 'coal', 'ingredients': ['log']},
 		{'id': 'steel', 'ingredients': ['coal','iron']}
-	]
+	],
 }
 
 static var loot_tables: Dictionary = {
@@ -32,8 +36,15 @@ static var loot_tables: Dictionary = {
 		{'item': 'stone', 'chance': 1.0, 'min': 2, 'max': 4},
 		{'item': 'iron', 'chance': 0.2, 'min': 1, 'max': 1},
 	],
+	'bush': [
+		{'item': 'stick', 'chance': 1.0, 'min': 2, 'max': 4},
+		{'item': 'berry', 'chance': 0.5, 'min': 1, 'max': 3},
+	],
 	'wall': [
 		{'item': 'wall', 'chance': 1.0, 'min': 1, 'max': 1},
+	],
+	'anvil': [
+		{'item': 'steel', 'chance': 0.5, 'min': 1, 'max': 1},
 	],
 }
 static func _static_init() -> void:

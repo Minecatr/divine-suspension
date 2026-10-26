@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bxvwflv5ik7qn"]
+
+[ext_resource type="Script" uid="uid://6ysn0hlilbpp" path="res://anvil.gd" id="1_hv50k"]
+[ext_resource type="PackedScene" uid="uid://ch0l27577faye" path="res://assets/models/anvil.glb" id="2_5fsy1"]
+[ext_resource type="Material" uid="uid://dv0a3j3vx0a2a" path="res://steel.tres" id="3_e7d8o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
+size = Vector3(0.4, 0.325, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
+size = Vector3(0.5, 0.4, 0.3)
+
+[node name="Anvil" type="RigidBody3D" unique_id=1653841297 groups=["interactable"]]
+mass = 10.0
+script = ExtResource("1_hv50k")
+max_health = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=231793486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.163, 0)
+shape = SubResource("BoxShape3D_snmd0")
+
+[node name="anvil" parent="." unique_id=1603042436 instance=ExtResource("2_5fsy1")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Cube" parent="anvil" index="0" unique_id=1857940948]
+surface_material_override/0 = ExtResource("3_e7d8o")
+
+[node name="Center" type="Node3D" parent="." unique_id=113644014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=740530163]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1761906686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14999999, 2.9802322e-08)
+shape = SubResource("BoxShape3D_8ccjp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="anvil"]

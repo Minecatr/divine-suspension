@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b4niwvmbv0p5o"]
+
+[ext_resource type="Script" uid="uid://bgj6xsgokr32g" path="res://structure.gd" id="1_ehqem"]
+[ext_resource type="Material" uid="uid://dtivl7374fara" path="res://grass.tres" id="2_ehqem"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ccjp"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="SphereMesh" id="SphereMesh_68h2w"]
+radius = 0.25
+height = 0.5
+radial_segments = 16
+rings = 8
+
+[node name="Bush" type="StaticBody3D" unique_id=1457386778 groups=["interactable"]]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_ehqem")
+crafting_tools = Array[String]([])
+destroy_tools = Array[String](["", "axe", "pickaxe"])
+id = "bush"
+max_health = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1610082153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04951176, 0)
+shape = SubResource("BoxShape3D_8ccjp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1830206055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000046, 0)
+mesh = SubResource("SphereMesh_68h2w")
+surface_material_override/0 = ExtResource("2_ehqem")
+
+[node name="Center" type="Node3D" parent="." unique_id=1381549629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)

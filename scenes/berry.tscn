@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://col7bx7shjisk"]
+
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_1kxkh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vcmpl"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_1kxkh"]
+radius = 0.1
+height = 0.2
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3b2i"]
+albedo_color = Color(0.8901961, 0.25882354, 0.5019608, 1)
+z_clip_scale = 0.5
+
+[node name="Berry" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+can_sleep = false
+script = ExtResource("1_1kxkh")
+id = "berry"
+consumable = true
+heal_amount = 25
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("SphereShape3D_vcmpl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228 groups=["item"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("SphereMesh_1kxkh")
+surface_material_override/0 = SubResource("StandardMaterial3D_q3b2i")
+
+[node name="Center" type="Node3D" parent="." unique_id=771292868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

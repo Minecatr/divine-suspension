@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d2c2ciok6dink"]
+
+[ext_resource type="Script" uid="uid://dj7qyfof7h6it" path="res://scenes/events/anvils.gd" id="1_qej8x"]
+
+[node name="Anvils" type="Node3D" unique_id=227844722 groups=["interactable"]]
+script = ExtResource("1_qej8x")
+
+[node name="Timer" type="Timer" parent="." unique_id=1968898054]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="." unique_id=773833417]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

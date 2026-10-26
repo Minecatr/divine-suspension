@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dq57qgq55jdp3"]
+
+[ext_resource type="Script" uid="uid://dj5oirgb6tdqj" path="res://scenes/events/flood.gd" id="1_cj5pu"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1vi2s"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rujv5"]
+size = Vector2(4000, 4000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snmd0"]
+blend_mode = 3
+albedo_color = Color(0, 0.14901961, 0.30588236, 1)
+roughness = 0.0
+refraction_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snmd0"]
+bg_color = Color(0, 0.14901961, 0.30588236, 0.5019608)
+
+[node name="Flood" type="Node3D" unique_id=1528208529]
+script = ExtResource("1_cj5pu")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=1055513349]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1508411114]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1671174344]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("WorldBoundaryShape3D_1vi2s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1363012162]
+mesh = SubResource("PlaneMesh_rujv5")
+surface_material_override/0 = SubResource("StandardMaterial3D_snmd0")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=1315778715]
+wait_time = 0.1
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=795877167]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=2048710230]
+visible = false
+z_index = -5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_snmd0")
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
