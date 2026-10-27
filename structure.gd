@@ -9,6 +9,7 @@ extends StaticBody3D
 @export var max_health:int=0
 @onready var health = max_health
 @onready var acid_cast = preload("res://scenes/events/acid_cast.tscn")
+@onready var sound = preload("res://sound.tscn")
 
 var items:Array
 
@@ -40,6 +41,7 @@ func interact(tool,damage_amount):
 func damage(amount):
 	health -= amount
 	if health <= 0:
+		play_sound('break')
 		if GLOBALS.loot_tables.has(id):
 			GLOBALS.spawn_drops(id,center.global_position)
 		queue_free()
@@ -51,3 +53,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group('item'):
 		items.erase(body)
+
+func play_sound(sid):
+	var sound_instance : AudioStreamPlayer3D= sound.instantiate()
+	sound_instance.stream = load("res://assets/sounds/"+sid+".wav")
+	GLOBALS.world.add_child(sound_instance)

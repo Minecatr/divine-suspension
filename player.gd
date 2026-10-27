@@ -27,7 +27,7 @@ var max_health := 100
 @onready var hand = camera.get_node("Hand")
 @onready var back = $Back
 @onready var model = $MeshInstance3D
-@onready var message :=preload("res://message.tscn")
+@onready var sound = preload("res://sound.tscn")
 var held_item : RigidBody3D
 var stored_item : RigidBody3D
 
@@ -65,6 +65,7 @@ func _physics_process(delta: float) -> void:
 		damage(1)
 
 func damage(amount):
+	play_sound('enemy-hit')
 	health -= amount
 	health = clamp(health,0,max_health)
 	if GLOBALS.health_bar:
@@ -131,6 +132,7 @@ func _process(_delta: float) -> void:
 					if held_item.consumable:
 						held_item.queue_free()
 		if Input.is_action_just_pressed("interact") and object.is_in_group('item') and not held_item:
+			#play_sound('item_equip')
 			object.reparent(hand)
 			object.position = Vector3.ZERO
 			object.rotation = Vector3.ZERO
@@ -148,6 +150,7 @@ func _process(_delta: float) -> void:
 		held_item.reparent(get_parent())
 		held_item = null
 	if Input.is_action_just_pressed('store'):
+		play_sound('item_equip')
 		var new_stored_item
 		var new_held_item 
 		if stored_item:
@@ -163,6 +166,10 @@ func _process(_delta: float) -> void:
 		stored_item = new_stored_item
 		held_item = new_held_item
 
+func play_sound(id):
+	var sound_instance : AudioStreamPlayer3D= sound.instantiate()
+	sound_instance.stream = load("res://assets/sounds/"+id+".wav")
+	GLOBALS.world.add_child(sound_instance)
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	can_swing = true

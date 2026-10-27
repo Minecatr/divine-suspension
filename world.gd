@@ -20,7 +20,8 @@ var events = {
 	preload('res://scenes/events/lava_floor.tscn'): 15.0,
 	preload("res://scenes/events/flood.tscn"): 30.0,
 	preload("res://scenes/events/acid_rain.tscn"): 30.0,
-	preload("res://scenes/events/meteor.tscn"): 15,
+	preload("res://scenes/events/meteor.tscn"): 15.0,
+	preload("res://large-crow.tscn"): 300.0# 300.0,
 	#preload("res://scenes/events/sandstorm.tscn"): 0.0
 }
 var elapsed:float
@@ -54,7 +55,7 @@ func consume(id):
 				gift_instance.position = Vector3(randf_range(-spawn_range,spawn_range),20,randf_range(-spawn_range,spawn_range))
 				add_child(gift_instance)
 			1:
-				island_size+=1.0
+				island_size+=2.0
 				update_island_size()
 			2:
 				var feature_instance = features.pick_random().instantiate()

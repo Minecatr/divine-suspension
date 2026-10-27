@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
-const SPEED := 150.0
+@export var SPEED := 150.0
 @export var ACCELERATION := 1.0
-
+@export var death_message :String
+var message = 'A formidable foe is aproaching'
 @onready var animation_player = $AnimationPlayer
 var attacking:=false
 const DAMAGE := 5
-var max_health := 10
+@export var max_health := 10
 var gravity := 0
 var dead := false
 @onready var health := max_health
@@ -18,6 +19,7 @@ func interact(_item,damage_amount):
 func damage(amount):
 	health -= amount
 	if health <= 0:
+		if death_message: GLOBALS.world.create_message(death_message)
 		dead = true
 		motion_mode = CharacterBody3D.MOTION_MODE_GROUNDED
 		gravity = 10

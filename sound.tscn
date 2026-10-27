@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://x731bk5wfjub"]
+
+[ext_resource type="Script" uid="uid://b7yclffexbct" path="res://audio_stream_player_3d.gd" id="1_3j8lq"]
+
+[node name="Sound" type="AudioStreamPlayer3D" unique_id=422066459]
+autoplay = true
+script = ExtResource("1_3j8lq")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
