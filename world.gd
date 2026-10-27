@@ -1,5 +1,8 @@
 extends Node3D
 
+@warning_ignore("unused_signal")
+signal acid_tick
+
 @onready var cutscene_player = $AnimationPlayer
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var health_bar = $CanvasLayer/HUD/ProgressBar
@@ -13,10 +16,12 @@ var features = [
 ]
 var events = {
 	preload('res://scenes/events/crows.tscn'): 15.0,
-	preload('res://scenes/events/anvils.tscn'): 15.0,
+	preload('res://scenes/events/anvils.tscn'): 30.0,
 	preload('res://scenes/events/lava_floor.tscn'): 15.0,
-	preload("res://scenes/events/flood.tscn"): 15.0,
-	preload("res://scenes/events/sandstorm.tscn"): 0.0
+	preload("res://scenes/events/flood.tscn"): 30.0,
+	preload("res://scenes/events/acid_rain.tscn"): 30.0,
+	preload("res://scenes/events/meteor.tscn"): 15,
+	#preload("res://scenes/events/sandstorm.tscn"): 0.0
 }
 var elapsed:float
 var island_size:float=4.0
@@ -81,7 +86,8 @@ func create_message(text):
 	var new_message = message.instantiate()
 	new_message.text = text
 	new_message.get_node('AnimationPlayer').play('start')
-	hud.add_child(new_message)
+	hud.get_node('MessageBox').add_child(new_message)
+	hud.get_node('MessageBox').move_child(new_message,0)
 
 func _process(delta: float) -> void:
 	elapsed += delta

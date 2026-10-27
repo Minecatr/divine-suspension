@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://d1f2hdj2xacsp"]
+
+[ext_resource type="Script" uid="uid://6ysn0hlilbpp" path="res://anvil.gd" id="1_yj27g"]
+[ext_resource type="Material" uid="uid://cr88sgk8mmj0h" path="res://stone.tres" id="2_8bdaw"]
+[ext_resource type="PackedScene" uid="uid://d287xjbcpul3g" path="res://Fire.tscn" id="3_8bdaw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_snmd0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_snmd0"]
+radial_segments = 16
+rings = 8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8ccjp"]
+radius = 0.55
+
+[node name="Meteor" type="RigidBody3D" unique_id=1298747925 groups=["interactable"]]
+script = ExtResource("1_yj27g")
+id = "meteor"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=742837946]
+shape = SubResource("SphereShape3D_snmd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1962665529]
+layers = 7
+mesh = SubResource("SphereMesh_snmd0")
+surface_material_override/0 = ExtResource("2_8bdaw")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=642367748]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=475068213]
+shape = SubResource("SphereShape3D_8ccjp")
+
+[node name="Center" type="Node3D" parent="." unique_id=1045667061]
+
+[node name="Fire" parent="." unique_id=31694877 instance=ExtResource("3_8bdaw")]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -67,7 +67,8 @@ func _physics_process(delta: float) -> void:
 func damage(amount):
 	health -= amount
 	health = clamp(health,0,max_health)
-	GLOBALS.health_bar.value = health
+	if GLOBALS.health_bar:
+		GLOBALS.health_bar.value = health
 	if health <= 0:
 		get_tree().reload_current_scene()
 

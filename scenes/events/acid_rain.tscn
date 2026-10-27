@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://c5477mewtcyvq"]
+
+[ext_resource type="Script" uid="uid://cwgapthuywkb3" path="res://scenes/events/acid_rain.gd" id="1_ywnde"]
+[ext_resource type="Texture2D" uid="uid://bp54y3j5ckd3y" path="res://assets/rain.png" id="2_cs6rg"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_snmd0"]
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 90.0
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rujv5"]
+transparency = 1
+albedo_color = Color(0.63000005, 0.9, 0, 0.3882353)
+albedo_texture = ExtResource("2_cs6rg")
+billboard_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8ccjp"]
+material = SubResource("StandardMaterial3D_rujv5")
+orientation = 2
+
+[sub_resource type="Skin" id="Skin_lmhem"]
+
+[node name="AcidRain" type="Node3D" unique_id=858641557]
+script = ExtResource("1_ywnde")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2045207183]
+layers = 7
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_snmd0")
+draw_pass_1 = SubResource("PlaneMesh_8ccjp")
+draw_skin = SubResource("Skin_lmhem")
+
+[node name="HitTimer" type="Timer" parent="." unique_id=119831062]
+autostart = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1001976259]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

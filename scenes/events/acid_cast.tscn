@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bwhxo3g0epuda"]
+
+[ext_resource type="Script" uid="uid://h35677a2sfrr" path="res://acid_cast.gd" id="1_sfmro"]
+
+[node name="AcidCast" type="RayCast3D" unique_id=615912827]
+target_position = Vector3(0, 5, 0)
+collision_mask = 7
+script = ExtResource("1_sfmro")
+
+[node name="Grace" type="Timer" parent="." unique_id=2006494226]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Grace" to="." method="_on_grace_timeout"]

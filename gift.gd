@@ -15,7 +15,8 @@ var items = [
 	'stone',
 	'berry',
 	'pickaxe',
-	'sand'
+	'sand',
+	'wall'
 ]
 
 func interact(_item,damage_amount):

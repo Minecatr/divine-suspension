@@ -8,8 +8,14 @@ extends StaticBody3D
 
 @export var max_health:int=0
 @onready var health = max_health
+@onready var acid_cast = preload("res://scenes/events/acid_cast.tscn")
 
 var items:Array
+
+
+func _ready() -> void:
+	if id != 'crafting_table':
+		add_child(acid_cast.instantiate())
 
 func interact(tool,damage_amount):
 	if GLOBALS.recipe_sets.has(id) and tool in crafting_tools:

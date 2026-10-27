@@ -2,12 +2,15 @@
 
 [ext_resource type="Script" uid="uid://do2ylmbr7qf0n" path="res://message.gd" id="1_d26o2"]
 
+[sub_resource type="Animation" id="Animation_06ydw"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_d26o2"]
 resource_name = "start"
 length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
@@ -44,18 +47,25 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_06ydw"]
 _data = {
+&"RESET": SubResource("Animation_06ydw"),
 &"start": SubResource("Animation_d26o2")
 }
 
 [node name="Label" type="Label" unique_id=754393629]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
-anchor_right = 1.0
-offset_top = 96.0
-offset_bottom = 119.000084
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -11.5
+offset_right = 61.0
+offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
 text = "You are blessed"
 horizontal_alignment = 1
 script = ExtResource("1_d26o2")

@@ -46,6 +46,10 @@ static var loot_tables: Dictionary = {
 	'anvil': [
 		{'item': 'steel', 'chance': 0.5, 'min': 1, 'max': 1},
 	],
+	'meteor': [
+		{'item': 'steel', 'chance': 1.0, 'min': 0, 'max': 3},
+		{'item': 'stone', 'chance': 1.0, 'min': 2, 'max': 8},
+	],
 }
 static func _static_init() -> void:
 	for recipe in recipe_sets["plot"]:

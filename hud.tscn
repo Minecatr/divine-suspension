@@ -49,3 +49,12 @@ stretch_margin_bottom = 6
 texture_under = ExtResource("3_640wx")
 texture_progress = ExtResource("3_640wx")
 tint_under = Color(0.09803922, 0.09803922, 0.09803922, 0.6)
+
+[node name="MessageBox" type="VBoxContainer" parent="." unique_id=1384576271]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
