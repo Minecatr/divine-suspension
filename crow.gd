@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var SPEED := 150.0
 @export var ACCELERATION := 1.0
 @export var death_message :String
+@export var formidable:bool = false
 var message = 'A formidable foe is aproaching'
 @onready var animation_player = $AnimationPlayer
 var attacking:=false
@@ -23,6 +24,8 @@ func damage(amount):
 		dead = true
 		motion_mode = CharacterBody3D.MOTION_MODE_GROUNDED
 		gravity = 10
+		if formidable:
+			GLOBALS.spawn_drops('crow_boss',global_position)
 		animation_player.play('death')
 
 func _physics_process(delta: float) -> void:

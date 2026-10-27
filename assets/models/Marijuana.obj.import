@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ctiyff5y6u8dp"
+path="res://.godot/imported/Marijuana.obj-658849b5f4a316e51edd34f1f4e394ec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Marijuana.obj-658849b5f4a316e51edd34f1f4e394ec.mesh"]
+
+source_file="res://assets/models/Marijuana.obj"
+dest_files=["res://.godot/imported/Marijuana.obj-658849b5f4a316e51edd34f1f4e394ec.mesh", "res://.godot/imported/Marijuana.obj-658849b5f4a316e51edd34f1f4e394ec.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

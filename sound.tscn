@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b7yclffexbct" path="res://audio_stream_player_3d.gd" id="1_3j8lq"]
 
 [node name="Sound" type="AudioStreamPlayer3D" unique_id=422066459]
+volume_db = -20.0
 autoplay = true
 script = ExtResource("1_3j8lq")
 

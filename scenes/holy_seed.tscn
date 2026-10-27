@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dyok8xa02ysg6"]
+
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_kq6mk"]
+[ext_resource type="PackedScene" uid="uid://dol6qeq5j61v5" path="res://scenes/holy_plant.tscn" id="2_l184s"]
+[ext_resource type="Material" uid="uid://dv0a3j3vx0a2a" path="res://steel.tres" id="3_l184s"]
+[ext_resource type="Texture2D" uid="uid://bchd7qgkki8u1" path="res://assets/textures/ui.svg" id="4_a7sle"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_snmd0"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_snmd0"]
+radius = 0.05
+height = 0.1
+
+[node name="HolySeed" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_kq6mk")
+id = "holy_seed"
+consumable = true
+structure = ExtResource("2_l184s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999997, 0)
+shape = SubResource("BoxShape3D_snmd0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999997, 0)
+mesh = SubResource("SphereMesh_snmd0")
+surface_material_override/0 = ExtResource("3_l184s")
+
+[node name="Center" type="Node3D" parent="." unique_id=51247295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1728229760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+modulate = Color(1, 0.8333334, 0, 1)
+pixel_size = 0.005
+billboard = 1
+texture = ExtResource("4_a7sle")

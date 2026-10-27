@@ -5,7 +5,7 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1vi2s"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rujv5"]
-size = Vector2(4000, 4000)
+size = Vector2(800, 800)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snmd0"]
 blend_mode = 3

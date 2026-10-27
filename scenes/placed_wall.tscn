@@ -10,7 +10,7 @@ size = Vector3(1, 1, 0.1)
 size = Vector3(1, 1, 0.1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k2ro4"]
-radius = 0.05
+radius = 0.1
 
 [node name="Wall" type="StaticBody3D" unique_id=517976432 groups=["interactable"]]
 collision_layer = 5
@@ -37,12 +37,4 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="PlacementZone" unique_id=2109588893]
-shape = SubResource("SphereShape3D_k2ro4")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="PlacementZone" unique_id=645594825]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
-shape = SubResource("SphereShape3D_k2ro4")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="PlacementZone" unique_id=1805357258]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99999994, -1, 0)
 shape = SubResource("SphereShape3D_k2ro4")

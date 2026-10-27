@@ -50,6 +50,12 @@ static var loot_tables: Dictionary = {
 		{'item': 'steel', 'chance': 1.0, 'min': 0, 'max': 3},
 		{'item': 'stone', 'chance': 1.0, 'min': 2, 'max': 8},
 	],
+	'holy': [
+		{'item': 'holy_berry', 'chance': 1.0, 'min': 1, 'max': 3}
+	],
+	'crow_boss': [
+		{'item': 'holy_seed', 'chance': 1.0, 'min': 1, 'max': 1}
+	]
 }
 static func _static_init() -> void:
 	for recipe in recipe_sets["plot"]:

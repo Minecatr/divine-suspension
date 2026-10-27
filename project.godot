@@ -13,6 +13,7 @@ config_version=5
 config/name="Divine Suspension"
 run/main_scene="uid://cdoe15aigxb0p"
 config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/image="uid://bnpedo8ccc45e"
 config/icon="res://icon.svg"
 
 [editor]

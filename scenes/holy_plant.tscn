@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dol6qeq5j61v5"]
+
+[ext_resource type="Script" uid="uid://01sov0l5i8ca" path="res://scenes/holy_plant.gd" id="1_1duo2"]
+[ext_resource type="Material" uid="uid://dtivl7374fara" path="res://grass.tres" id="2_d6ct0"]
+[ext_resource type="Material" uid="uid://bj5p8eb36jb5c" path="res://wood.tres" id="3_2rqyb"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3rutc"]
+top_radius = 0.1
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66a6d"]
+size = Vector3(0.25, 0.5, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hfij2"]
+size = Vector3(0.25, 0.5, 0.25)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=439763588 groups=["interactable"]]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_1duo2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1213955085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50000006, 0)
+mesh = SubResource("CylinderMesh_3rutc")
+surface_material_override/0 = ExtResource("2_d6ct0")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1615485172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6000001, 0)
+mesh = SubResource("CylinderMesh_3rutc")
+surface_material_override/0 = ExtResource("2_d6ct0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=172191761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25000003, 0)
+shape = SubResource("BoxShape3D_66a6d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2030657847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25000003, 0)
+mesh = SubResource("BoxMesh_hfij2")
+surface_material_override/0 = ExtResource("3_2rqyb")
+
+[node name="Center" type="Node3D" parent="." unique_id=894264419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24999999, 0)

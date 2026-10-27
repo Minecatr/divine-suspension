@@ -1,7 +1,6 @@
 extends Node3D
 
 var message := 'It shall now acid rain!'
-@onready var shape := $ShapeCast3D
 @onready var particles := $GPUParticles3D
 
 func _process(_delta: float) -> void:

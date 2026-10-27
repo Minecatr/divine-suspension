@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://b8c5spbxsq2oy"]
+
+[ext_resource type="Script" uid="uid://dflfmxu45bwu2" path="res://scenes/item.gd" id="1_m8ixh"]
+[ext_resource type="ArrayMesh" uid="uid://ctiyff5y6u8dp" path="res://assets/models/Marijuana.obj" id="2_l0ixf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vcmpl"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0ixf"]
+albedo_color = Color(1, 0.7166667, 0, 1)
+emission_enabled = true
+emission = Color(0.99999994, 0.82471675, 0.5799448, 1)
+emission_energy_multiplier = 3.75
+
+[node name="HolyBerry" type="RigidBody3D" unique_id=654315378 groups=["item"]]
+collision_layer = 4
+collision_mask = 5
+can_sleep = false
+script = ExtResource("1_m8ixh")
+id = "holy_berry"
+consumable = true
+heal_amount = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=778091665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("SphereShape3D_vcmpl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=802288228]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = ExtResource("2_l0ixf")
+surface_material_override/0 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/1 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/2 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/3 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/4 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/5 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/6 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/7 = SubResource("StandardMaterial3D_l0ixf")
+surface_material_override/8 = SubResource("StandardMaterial3D_l0ixf")
+
+[node name="Center" type="Node3D" parent="." unique_id=771292868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

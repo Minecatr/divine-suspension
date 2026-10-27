@@ -16,11 +16,12 @@ var features = [
 ]
 var events = {
 	preload('res://scenes/events/crows.tscn'): 15.0,
-	preload('res://scenes/events/anvils.tscn'): 30.0,
+	preload('res://scenes/events/anvils.tscn'): 60.0,
 	preload('res://scenes/events/lava_floor.tscn'): 15.0,
 	preload("res://scenes/events/flood.tscn"): 30.0,
 	preload("res://scenes/events/acid_rain.tscn"): 30.0,
 	preload("res://scenes/events/meteor.tscn"): 15.0,
+	preload('res://scenes/events/nature.tscn'): 30.0,
 	preload("res://large-crow.tscn"): 300.0# 300.0,
 	#preload("res://scenes/events/sandstorm.tscn"): 0.0
 }
@@ -38,6 +39,15 @@ func _ready() -> void:
 	create_message('How dare you step on a crack!')
 
 func consume(id):
+	if id == 'holy_berry':
+		create_message('more.')
+		var env = $WorldEnvironment.environment
+		var sky = env.sky.sky_material
+		sky.sky_top_color = Color(randf(),randf(),randf())
+		sky.sky_horizon_color = Color(randf(),randf(),randf())
+		sky.ground_bottom_color = sky.sky_horizon_color
+		sky.ground_horizon_color = sky.sky_horizon_color
+		env.fog_light_color = sky.sky_horizon_color
 	if not consumed_items.has(id):
 		consumed_items[id] = 1
 	else:
@@ -58,10 +68,13 @@ func consume(id):
 				island_size+=2.0
 				update_island_size()
 			2:
-				var feature_instance = features.pick_random().instantiate()
-				var spawn_range = island_size - 1.0
-				feature_instance.position = Vector3(randi_range(-spawn_range,spawn_range)/2.0,1,randi_range(-spawn_range,spawn_range)/2.0)
-				add_child(feature_instance)
+				restore_nature()
+
+func restore_nature():
+	var feature_instance = features.pick_random().instantiate()
+	var spawn_range = island_size - 1.0
+	feature_instance.position = Vector3(randi_range(-spawn_range,spawn_range)/2.0,1,randi_range(-spawn_range,spawn_range)/2.0)
+	add_child(feature_instance)
 
 func toggle_settings():
 	pass

@@ -169,6 +169,7 @@ motion_mode = 1
 script = ExtResource("1_e58oy")
 SPEED = 250.0
 death_message = "You win, but don't think I will send you back."
+formidable = true
 max_health = 1000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=95961451]
@@ -184,7 +185,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 [node name="crow" parent="." unique_id=220613598 instance=ExtResource("2_wedxa")]
 transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 0, 0, 0)
 
-[node name="Circle_001" parent="crow" index="1" unique_id=1576776646]
+[node name="Circle_001" parent="crow" index="1" unique_id=943916447]
 surface_material_override/1 = SubResource("StandardMaterial3D_67soq")
 
 [node name="RayCast3D" parent="." unique_id=615912827 instance=ExtResource("3_6658v")]

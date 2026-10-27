@@ -115,8 +115,6 @@ func _process(_delta: float) -> void:
 				damage(-held_item.heal_amount)
 				if held_item.consumable:
 					held_item.queue_free()
-					can_swing = false
-					animation_player.play("swing")
 			elif object:
 				if object.is_in_group('interactable') and can_swing:
 					can_swing = false
